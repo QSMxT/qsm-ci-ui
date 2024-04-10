@@ -45,8 +45,8 @@ export default function RangeSlider(props: any) {
         console.error(error);
       }
     });
-  }, [props.pick]);
-  
+  }, [props.pick, props.nv]);
+
   function onRangeChange(newValue: number | number[]) {
     setRange(newValue);
     props.nv.volumes[0].cal_min = range[0];
