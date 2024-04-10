@@ -57,5 +57,5 @@ jobs:
         shell: bash
         run: |
           echo ${{ secrets.BACK4APP_ACCOUNT_KEY }} | b4a configure accountkey
-          echo "e ./elo-compare " | b4a new -a elo-compare
-          cp elo-compare/.parse.local . && cp elo-compare/.parse.project . && b4a deploy
+          echo "e ./qsm-ci " | b4a new -a qsm-ci
+          cp qsm-ci/.parse.local . && cp qsm-ci/.parse.project . && b4a deploy
