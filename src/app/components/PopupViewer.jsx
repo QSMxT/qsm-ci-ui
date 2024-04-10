@@ -22,7 +22,7 @@ export default function PopupViewer({ algo, url }) {
         });
     }
     loadImage(url);
-  }, [url]);
+  }, [url, nv]);
 
   return (
     <Popup trigger={<button className="button"> View </button>} modal>
