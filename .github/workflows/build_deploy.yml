@@ -1,0 +1,61 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: Buld production bundle
+        uses: borales/actions-yarn@v4
+        env:
+          REACT_APP_APPLICATION_ID: ${{ secrets.REACT_APP_APPLICATION_ID }}
+          REACT_APP_APPLICATION_KEY: ${{ secrets.REACT_APP_APPLICATION_KEY }}
+        with:
+          cmd: run build
+      - name: Copy compiled code to public folder for back4app upload
+        run: |
+          cp -r build/* public
+      - name: Setup back4app CLI
+        shell: bash
+        run: |
+          curl https://raw.githubusercontent.com/back4app/parse-cli/back4app/installer.sh | sudo /bin/bash
+      - name: Login to back4app
+        shell: bash
+        run: |
+          echo ${{ secrets.BACK4APP_ACCOUNT_KEY }} | b4a configure accountkey
+          echo "e ./elo-compare " | b4a new -a elo-compare
+          cp elo-compare/.parse.local . && cp elo-compare/.parse.project . && b4a deploy
