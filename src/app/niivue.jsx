@@ -54,7 +54,7 @@ export default class NiiVue extends React.PureComponent {
           <ResizableBox
             className="box"
             width={"100%"}
-            height={200}
+            height={300}
             axis="y"
             minConstraints={["100%", 150]}
             resizeHandles={["nw", "ne"]}

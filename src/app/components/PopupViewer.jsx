@@ -4,15 +4,15 @@ import "../../index.css";
 import { NiivuePanel } from "./NiivuePanel";
 import { Niivue } from "@niivue/niivue";
 
-const nv = new Niivue({
-  loadingText: "Loading",
-  dragAndDropEnabled: true,
-  textHeight: "0.02",
-  backColor: [0, 0, 0, 1],
-  crosshairColor: [244, 243, 238, 0.5],
-});
-
 export default function PopupViewer({ algo, url }) {
+  const nv = new Niivue({
+    loadingText: "Loading",
+    dragAndDropEnabled: true,
+    textHeight: "0.02",
+    backColor: [0, 0, 0, 1],
+    crosshairColor: [244, 243, 238, 0.5],
+  });
+
   React.useEffect(() => {
     async function loadImage(url) {
       await nv
