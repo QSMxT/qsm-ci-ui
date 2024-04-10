@@ -22,7 +22,8 @@ export default function PopupViewer({ algo, url }) {
         });
     }
     loadImage(url);
-  }, [url, nv]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
   return (
     <Popup trigger={<button className="button"> View </button>} modal>
