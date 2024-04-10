@@ -14,4 +14,4 @@ Once the packages are installed, you can start the app by running the following 
 
 `yarn start`
 
-The app is deployed at: https://elocompare.b4a.app/
+The app is deployed at: https://qsm-ci.b4a.app/
