@@ -25,7 +25,7 @@ export function NiivuePanel(props) {
     );
     Parse.serverURL = "https://parseapi.back4app.com/";
     const params = { winner: winner, loser: loser };
-    const elo = await Parse.Cloud.run("elo", params).then((result) => {
+    await Parse.Cloud.run("elo", params).then((result) => {
       props.setPick(true);
     });
   };
