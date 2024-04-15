@@ -1,4 +1,4 @@
-Parse.Cloud.define("retrieveTwo", async (request) => {
+Parse.Cloud.define("retrieveTwo", async () => {
   function randomIntFromInterval(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -100,7 +100,7 @@ Parse.Cloud.define("retrieveScore", async (request) => {
     }
     return {
       algorithm: algorithm[algorithm.length - 1].split(".")[0],
-      elo: elo,
+      elo: (elo !== null) & (elo !== undefined) ? elo.toFixed(3) : elo,
       hfen: (hfen !== null) & (hfen !== undefined) ? hfen.toFixed(3) : hfen,
       nmi: (nmi !== null) & (nmi !== undefined) ? nmi.toFixed(3) : nmi,
       rmse: (rmse !== null) & (rmse !== undefined) ? rmse.toFixed(3) : rmse,
@@ -119,24 +119,6 @@ Parse.Cloud.define("retrieveScore", async (request) => {
 });
 
 Parse.Cloud.define("elo", async (request) => {
-  // Create a new Database
-  async function createImage() {
-    let ImageObject = Parse.Object.extend("Images");
-
-    myImage = new ImageObject();
-    myImage.set("url", "cloud");
-    myImage.set("elo", "34");
-
-    myImage
-      .save()
-      .then(function (imageobject) {
-        console.log("Image created successfully");
-      })
-      .catch(function (error) {
-        console.log("Error: " + error.message);
-      });
-  }
-
   async function updateElo(winnerUrl, winnerElo, looserUrl, looserElo) {
     console.log(winnerUrl, winnerElo, looserUrl, looserElo);
     if (winnerElo == null || winnerElo == undefined || winnerElo == "") {
