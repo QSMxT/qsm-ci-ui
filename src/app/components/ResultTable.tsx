@@ -159,7 +159,7 @@ const columns: ColumnsType<DataType> = [
       </>
     ),
     dataIndex: "elo",
-    sorter: (a, b) => b.xsim - a.xsim,
+    sorter: (a, b) => b.elo - a.elo,
   },
 ];
 
