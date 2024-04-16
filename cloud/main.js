@@ -13,7 +13,7 @@ Parse.Cloud.define("retrieveTwo", async () => {
       await query.first().then(function (image) {
         if (image) {
           url = image.get("url");
-          elo = image.get("elo");
+          elo = image.get("Elo");
         } else {
           console.log("Nothing found, please try again");
         }
@@ -80,7 +80,7 @@ Parse.Cloud.define("retrieveScore", async (request) => {
       query.equalTo("url", image_url);
       await query.first().then(function (image) {
         if (image) {
-          elo = image.get("elo");
+          elo = image.get("Elo");
           hfen = image.get("HFEN");
           nmi = image.get("NMI");
           rmse = image.get("RMSE");
@@ -131,8 +131,8 @@ Parse.Cloud.define("elo", async (request) => {
       parseFloat(winnerElo),
       parseFloat(looserElo)
     );
-    setElo(winnerUrl, winnerNewElo.toString());
-    setElo(looserUrl, looserNewElo.toString());
+    setElo(winnerUrl, winnerNewElo);
+    setElo(looserUrl, looserNewElo);
   }
 
   function calculateElo(winnerElo, looserElo) {
@@ -152,7 +152,7 @@ Parse.Cloud.define("elo", async (request) => {
     try {
       query.first().then(function (image) {
         if (image) {
-          image.set("elo", elo);
+          image.set("Elo", elo);
           image.save(null, {
             // https://github.com/mpc20001/SecureToDoCloudCodeRepo/blob/master/main.js
             useMasterKey: true, // required to update objects to database with restricted write access
