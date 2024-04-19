@@ -56,6 +56,7 @@ export default function RangeSlider({ nv, pick }: SliderProps) {
         }
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pick, nv]);
 
   function onRangeChange(newValue: number[]) {
