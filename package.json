@@ -65,6 +65,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/antd": "^1.0.0",
+    "eslint-config-react-app": "^7.0.1",
     "reactjs-popup": "^2.0.6"
   }
 }
